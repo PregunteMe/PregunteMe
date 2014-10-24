@@ -1,0 +1,4 @@
+pregunte_me_administracion:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing.yml"
+    prefix:   /
+

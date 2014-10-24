@@ -1,0 +1,23 @@
+PregunteMe\AdministracionBundle\Entity\Dimension:
+    type: entity
+    table: null
+    repositoryClass: PregunteMe\AdministracionBundle\Entity\DimensionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nombre:
+            type: string
+            length: 255
+        descripcion:
+            type: text
+        justificacion:
+            type: text
+    manyToOne:
+        modulo:
+            targetEntity: Modulo
+            inversedBy: dimensiones
+    lifecycleCallbacks: {  }

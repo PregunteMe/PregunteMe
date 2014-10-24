@@ -1,0 +1,35 @@
+pregunte_me_administracion_admin_casoEstudio:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing/casoestudio.yml"
+    prefix:   /admin/casoEstudio
+
+pregunte_me_administracion_admin_respuesta:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing/respuesta.yml"
+    prefix:   /admin/respuesta
+
+pregunte_me_administracion_admin_pregunta:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing/pregunta.yml"
+    prefix:   /admin/pregunta
+
+pregunte_me_administracion_admin_nivel:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing/nivel.yml"
+    prefix:   /admin/nivel
+
+pregunte_me_administracion_admin_indicador:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing/indicador.yml"
+    prefix:   /admin/indicador
+
+pregunte_me_administracion_admin_categoria:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing/categoria.yml"
+    prefix:   /admin/categoria
+
+pregunte_me_administracion_admin_dimension:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing/dimension.yml"
+    prefix:   /admin/dimension
+
+pregunte_me_administracion_admin_modulo:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing/modulo.yml"
+    prefix:   /admin/modulo
+
+pregunte_me_administracion_homepage:
+    path:     /
+    defaults: { _controller: PregunteMeAdministracionBundle:Default:index }

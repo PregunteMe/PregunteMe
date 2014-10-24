@@ -1,0 +1,30 @@
+admin_nivel:
+    path:     /
+    defaults: { _controller: "PregunteMeAdministracionBundle:Nivel:index" }
+
+admin_nivel_show:
+    path:     /{id}/show
+    defaults: { _controller: "PregunteMeAdministracionBundle:Nivel:show" }
+
+admin_nivel_new:
+    path:     /new
+    defaults: { _controller: "PregunteMeAdministracionBundle:Nivel:new" }
+
+admin_nivel_create:
+    path:     /create
+    defaults: { _controller: "PregunteMeAdministracionBundle:Nivel:create" }
+    requirements: { _method: post }
+
+admin_nivel_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PregunteMeAdministracionBundle:Nivel:edit" }
+
+admin_nivel_update:
+    path:     /{id}/update
+    defaults: { _controller: "PregunteMeAdministracionBundle:Nivel:update" }
+    requirements: { _method: post|put }
+
+admin_nivel_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PregunteMeAdministracionBundle:Nivel:delete" }
+    requirements: { _method: post|delete }

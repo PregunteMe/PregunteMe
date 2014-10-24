@@ -1,0 +1,26 @@
+PregunteMe\AdministracionBundle\Entity\Nivel:
+    type: entity
+    table: null
+    repositoryClass: PregunteMe\AdministracionBundle\Entity\NivelRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        cardinal:
+            type: integer
+        descripcion:
+            type: text
+        observacion:
+            type: text
+    manyToOne:
+        indicador:
+            targetEntity: Indicador
+            inversedBy: niveles
+    oneToMany:
+        preguntas:
+            targetEntity: Pregunta
+            mappedBy: niveles           
+    lifecycleCallbacks: {  }

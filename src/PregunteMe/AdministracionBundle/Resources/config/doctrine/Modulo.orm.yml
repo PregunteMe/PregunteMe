@@ -1,0 +1,19 @@
+PregunteMe\AdministracionBundle\Entity\Modulo:
+    type: entity
+    table: null
+    repositoryClass: PregunteMe\AdministracionBundle\Entity\ModuloRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nombre:
+            type: string
+            length: 255
+    oneToMany:
+        dimensiones:
+            targetEntity: Dimension
+            mappedBy: modulo           
+    lifecycleCallbacks: {  }

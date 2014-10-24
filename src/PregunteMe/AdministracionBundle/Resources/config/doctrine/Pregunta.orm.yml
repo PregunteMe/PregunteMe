@@ -1,0 +1,29 @@
+PregunteMe\AdministracionBundle\Entity\Pregunta:
+    type: entity
+    table: null
+    repositoryClass: PregunteMe\AdministracionBundle\Entity\PreguntaRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        texto:
+            type: text
+        puntajeMin:
+            type: float
+        evaluador:
+            type: string
+            length: 255
+        cardinal:
+            type: integer
+    manyToOne:
+        nivel:
+            targetEntity: Nivel
+            inversedBy: preguntas
+    oneToMany:
+        respuesta:
+            targetEntity: Respuesta
+            mappedBy: preguntas           
+    lifecycleCallbacks: {  }

@@ -1,0 +1,27 @@
+PregunteMe\AdministracionBundle\Entity\Indicador:
+    type: entity
+    table: null
+    repositoryClass: PregunteMe\AdministracionBundle\Entity\IndicadorRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nombre:
+            type: string
+            length: 255
+        descripcion:
+            type: text
+        justificacion:
+            type: text
+    manyToOne:
+        categoria:
+            targetEntity: Categoria
+            inversedBy: indicadores
+    oneToMany:
+        niveles:
+            targetEntity: Nivel
+            mappedBy: indicador           
+    lifecycleCallbacks: {  }

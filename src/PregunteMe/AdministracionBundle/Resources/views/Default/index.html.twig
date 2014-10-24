@@ -1,0 +1,17 @@
+
+<table>
+<tr>
+<td>Nombre</td>
+<td>Dimension</td>
+<td>Categoria</td>
+<td>Indicador</td>
+</tr>
+{% for indicador in indicadores %}
+	<tr>
+	<td>{{indicador.categoria.dimension.modulo.nombre}}</td>
+	<td>{{indicador.categoria.dimension.nombre}}</td>
+	<td>{{indicador.categoria.nombre}}</td>
+	<td>{{indicador.nombre	}}</td>
+	</tr>
+{% endfor %}
+</table>

@@ -1,0 +1,30 @@
+admin_modulo:
+    path:     /
+    defaults: { _controller: "PregunteMeAdministracionBundle:Modulo:index" }
+
+admin_modulo_show:
+    path:     /{id}/show
+    defaults: { _controller: "PregunteMeAdministracionBundle:Modulo:show" }
+
+admin_modulo_new:
+    path:     /new
+    defaults: { _controller: "PregunteMeAdministracionBundle:Modulo:new" }
+
+admin_modulo_create:
+    path:     /create
+    defaults: { _controller: "PregunteMeAdministracionBundle:Modulo:create" }
+    requirements: { _method: post }
+
+admin_modulo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PregunteMeAdministracionBundle:Modulo:edit" }
+
+admin_modulo_update:
+    path:     /{id}/update
+    defaults: { _controller: "PregunteMeAdministracionBundle:Modulo:update" }
+    requirements: { _method: post|put }
+
+admin_modulo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PregunteMeAdministracionBundle:Modulo:delete" }
+    requirements: { _method: post|delete }

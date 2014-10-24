@@ -1,0 +1,30 @@
+admin_casoEstudio:
+    path:     /
+    defaults: { _controller: "PregunteMeAdministracionBundle:CasoEstudio:index" }
+
+admin_casoEstudio_show:
+    path:     /{id}/show
+    defaults: { _controller: "PregunteMeAdministracionBundle:CasoEstudio:show" }
+
+admin_casoEstudio_new:
+    path:     /new
+    defaults: { _controller: "PregunteMeAdministracionBundle:CasoEstudio:new" }
+
+admin_casoEstudio_create:
+    path:     /create
+    defaults: { _controller: "PregunteMeAdministracionBundle:CasoEstudio:create" }
+    requirements: { _method: post }
+
+admin_casoEstudio_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PregunteMeAdministracionBundle:CasoEstudio:edit" }
+
+admin_casoEstudio_update:
+    path:     /{id}/update
+    defaults: { _controller: "PregunteMeAdministracionBundle:CasoEstudio:update" }
+    requirements: { _method: post|put }
+
+admin_casoEstudio_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PregunteMeAdministracionBundle:CasoEstudio:delete" }
+    requirements: { _method: post|delete }

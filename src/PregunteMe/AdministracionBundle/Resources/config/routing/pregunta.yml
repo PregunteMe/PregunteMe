@@ -1,0 +1,30 @@
+admin_pregunta:
+    path:     /
+    defaults: { _controller: "PregunteMeAdministracionBundle:Pregunta:index" }
+
+admin_pregunta_show:
+    path:     /{id}/show
+    defaults: { _controller: "PregunteMeAdministracionBundle:Pregunta:show" }
+
+admin_pregunta_new:
+    path:     /new
+    defaults: { _controller: "PregunteMeAdministracionBundle:Pregunta:new" }
+
+admin_pregunta_create:
+    path:     /create
+    defaults: { _controller: "PregunteMeAdministracionBundle:Pregunta:create" }
+    requirements: { _method: post }
+
+admin_pregunta_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PregunteMeAdministracionBundle:Pregunta:edit" }
+
+admin_pregunta_update:
+    path:     /{id}/update
+    defaults: { _controller: "PregunteMeAdministracionBundle:Pregunta:update" }
+    requirements: { _method: post|put }
+
+admin_pregunta_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PregunteMeAdministracionBundle:Pregunta:delete" }
+    requirements: { _method: post|delete }

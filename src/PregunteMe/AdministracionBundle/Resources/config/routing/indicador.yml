@@ -1,0 +1,30 @@
+admin_indicador:
+    path:     /
+    defaults: { _controller: "PregunteMeAdministracionBundle:Indicador:index" }
+
+admin_indicador_show:
+    path:     /{id}/show
+    defaults: { _controller: "PregunteMeAdministracionBundle:Indicador:show" }
+
+admin_indicador_new:
+    path:     /new
+    defaults: { _controller: "PregunteMeAdministracionBundle:Indicador:new" }
+
+admin_indicador_create:
+    path:     /create
+    defaults: { _controller: "PregunteMeAdministracionBundle:Indicador:create" }
+    requirements: { _method: post }
+
+admin_indicador_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PregunteMeAdministracionBundle:Indicador:edit" }
+
+admin_indicador_update:
+    path:     /{id}/update
+    defaults: { _controller: "PregunteMeAdministracionBundle:Indicador:update" }
+    requirements: { _method: post|put }
+
+admin_indicador_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PregunteMeAdministracionBundle:Indicador:delete" }
+    requirements: { _method: post|delete }

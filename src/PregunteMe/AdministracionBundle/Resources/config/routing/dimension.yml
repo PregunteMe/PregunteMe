@@ -1,0 +1,30 @@
+admin_dimension:
+    path:     /
+    defaults: { _controller: "PregunteMeAdministracionBundle:Dimension:index" }
+
+admin_dimension_show:
+    path:     /{id}/show
+    defaults: { _controller: "PregunteMeAdministracionBundle:Dimension:show" }
+
+admin_dimension_new:
+    path:     /new
+    defaults: { _controller: "PregunteMeAdministracionBundle:Dimension:new" }
+
+admin_dimension_create:
+    path:     /create
+    defaults: { _controller: "PregunteMeAdministracionBundle:Dimension:create" }
+    requirements: { _method: post }
+
+admin_dimension_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PregunteMeAdministracionBundle:Dimension:edit" }
+
+admin_dimension_update:
+    path:     /{id}/update
+    defaults: { _controller: "PregunteMeAdministracionBundle:Dimension:update" }
+    requirements: { _method: post|put }
+
+admin_dimension_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PregunteMeAdministracionBundle:Dimension:delete" }
+    requirements: { _method: post|delete }
