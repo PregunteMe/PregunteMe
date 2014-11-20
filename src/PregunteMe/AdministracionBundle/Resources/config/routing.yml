@@ -31,5 +31,5 @@ pregunte_me_administracion_admin_modulo:
     prefix:   /admin/modulo
 
 pregunte_me_administracion_homepage:
-    path:     /
+    path:     /admin/contenidos
     defaults: { _controller: PregunteMeAdministracionBundle:Default:index }
