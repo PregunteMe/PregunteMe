@@ -1,0 +1,26 @@
+Desarrollo
+===========
+
+Instalación para entorno de desarrollo, sobre GNU/Linux (Debian o Ubuntu)
+
+Instalación y configuración
+---------------------------
+<pre>
+git clone https://github.com/PregunteMe/PregunteMe.git
+cd PregunteMe
+make install
+#Llenar los datos cuando configure el Symfony
+php app/console doctrine:database:create
+make db
+<pre>
+
+
+Pruebas
+-------
+
+<pre>
+php app/console server:run
+</pre>
+
+Visitar en su navegador: http://127.0.0.1:8000
+
