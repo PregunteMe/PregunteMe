@@ -1,3 +1,7 @@
+pregunte_me_presentacion:
+    resource: "@PregunteMePresentacionBundle/Resources/config/routing.yml"
+    prefix:   /
+
 pregunte_me_administracion:
     resource: "@PregunteMeAdministracionBundle/Resources/config/routing.yml"
     prefix:   /
