@@ -8,7 +8,8 @@ crud:
 assets:
 	sudo chown $(shell whoami):www-data web/bundles -R
 	sudo chmod ug+rw  app/cache web/bundles -R
-	sudo su www-data -c "php app/console assets:install ./web --symlink"
+	sudo php app/console assets:install ./web --symlink
+	
 
 cache:
 	make permisos
