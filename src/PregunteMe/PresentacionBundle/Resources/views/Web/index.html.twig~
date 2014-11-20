@@ -1,0 +1,11 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}PregunteMePresentacionBundle:Web:index{% endblock %}
+
+{% block body %}
+<h1>Pagina inicial del proyecto PregunteMe</h1>
+
+<a href="{{path('inscripcion')}}">Inscribir una nueva evaluación de un {{entorno}}</a>
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+index:
+    path:     /
+    defaults: { _controller: PregunteMePresentacionBundle:Web:index }
+
+inscripcion:
+    path:     /inscripcion
+    defaults: { _controller: PregunteMePresentacionBundle:Web:inscripcion }
+
+evaluacion:
+    path:     /evaluacion
+    defaults: { _controller: PregunteMePresentacionBundle:Web:evaluacion }
+
+resultados:
+    path:     /resultados
+    defaults: { _controller: PregunteMePresentacionBundle:Web:resultados }
+    
+salir:
+    path:     /salir
+    defaults: { _controller: PregunteMePresentacionBundle:Web:salir }
