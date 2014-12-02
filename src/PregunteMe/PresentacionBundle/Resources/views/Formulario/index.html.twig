@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Formulario{% endblock %}
+
+{% block body %}
+<h1>Bienvenido al instrumento de evaluacion de calidad de cursos virtuales</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Dimensiones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dimension in dimensiones %}
+            <tr>
+                <td><a href="{{ path('formulario_dimension', { 'id': dimension.id }) }}">{{ dimension.nombre  }}</a></td>                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

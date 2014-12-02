@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Formulario{% endblock %}
+
+{% block body %}
+<h1>Bienvenido al instrumento de evaluacion de calidad de cursos virtuales</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Categoria</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categoria in categorias %}
+            <tr>
+                <td><a href="{{ path('admin_categoria_show', { 'id': categoria.id }) }}">{{ categoria.nombre  }}</a></td>                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
