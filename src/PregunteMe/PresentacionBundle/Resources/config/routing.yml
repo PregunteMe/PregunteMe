@@ -17,3 +17,11 @@ resultados:
 salir:
     path:     /salir
     defaults: { _controller: PregunteMePresentacionBundle:Web:salir }
+    
+formulario:
+    path:     /formulario
+    defaults: { _controller: PregunteMePresentacionBundle:Formulario:index }
+        
+dimension:
+    path:     /dimension
+    defaults: { _controller: PregunteMePresentacionBundle:Formulario:dimension }
