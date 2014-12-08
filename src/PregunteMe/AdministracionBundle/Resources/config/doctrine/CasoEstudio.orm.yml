@@ -26,8 +26,12 @@ PregunteMe\AdministracionBundle\Entity\CasoEstudio:
         nombreObjeto:
             type: string
             length: 255
+    manyToOne:
+        usuario:
+            targetEntity: Usuario
+            inversedBy: casosEstudio
     manyToMany:
         respuestas:
             targetEntity: Respuesta
-            inversedBy: casosEstudio
+            
     lifecycleCallbacks: {  }

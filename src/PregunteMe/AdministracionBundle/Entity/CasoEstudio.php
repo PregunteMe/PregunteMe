@@ -45,6 +45,11 @@ class CasoEstudio
     private $nombreObjeto;
 
     /**
+     * @var \PregunteMe\AdministracionBundle\Entity\Usuario
+     */
+    private $usuario;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $respuestas;
@@ -203,6 +208,29 @@ class CasoEstudio
     public function getNombreObjeto()
     {
         return $this->nombreObjeto;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param \PregunteMe\AdministracionBundle\Entity\Usuario $usuario
+     * @return CasoEstudio
+     */
+    public function setUsuario(\PregunteMe\AdministracionBundle\Entity\Usuario $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \PregunteMe\AdministracionBundle\Entity\Usuario 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 
     /**
