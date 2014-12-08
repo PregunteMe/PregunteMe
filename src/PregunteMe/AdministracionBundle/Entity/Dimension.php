@@ -30,6 +30,11 @@ class Dimension
     private $justificacion;
 
     /**
+     * @var float
+     */
+    private $peso;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $categorias;
@@ -127,6 +132,29 @@ class Dimension
     }
 
     /**
+     * Set peso
+     *
+     * @param float $peso
+     * @return Dimension
+     */
+    public function setPeso($peso)
+    {
+        $this->peso = $peso;
+
+        return $this;
+    }
+
+    /**
+     * Get peso
+     *
+     * @return float 
+     */
+    public function getPeso()
+    {
+        return $this->peso;
+    }
+
+    /**
      * Add categorias
      *
      * @param \PregunteMe\AdministracionBundle\Entity\Categoria $categorias
@@ -181,8 +209,4 @@ class Dimension
     {
         return $this->modulo;
     }
-    public function __toString(){
-    	return $this->modulo." / ".$this->nombre;
-    }
-
 }

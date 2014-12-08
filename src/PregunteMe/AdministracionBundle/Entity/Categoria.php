@@ -30,6 +30,11 @@ class Categoria
     private $justificacion;
 
     /**
+     * @var float
+     */
+    private $peso;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $indicadores;
@@ -127,6 +132,29 @@ class Categoria
     }
 
     /**
+     * Set peso
+     *
+     * @param float $peso
+     * @return Categoria
+     */
+    public function setPeso($peso)
+    {
+        $this->peso = $peso;
+
+        return $this;
+    }
+
+    /**
+     * Get peso
+     *
+     * @return float 
+     */
+    public function getPeso()
+    {
+        return $this->peso;
+    }
+
+    /**
      * Add indicadores
      *
      * @param \PregunteMe\AdministracionBundle\Entity\Indicador $indicadores
@@ -180,9 +208,5 @@ class Categoria
     public function getDimension()
     {
         return $this->dimension;
-    }
-
-    public function __toString(){
-    	return $this->nombre;
     }
 }

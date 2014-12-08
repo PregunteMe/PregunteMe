@@ -30,6 +30,11 @@ class Indicador
     private $justificacion;
 
     /**
+     * @var float
+     */
+    private $peso;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $niveles;
@@ -124,6 +129,29 @@ class Indicador
     public function getJustificacion()
     {
         return $this->justificacion;
+    }
+
+    /**
+     * Set peso
+     *
+     * @param float $peso
+     * @return Indicador
+     */
+    public function setPeso($peso)
+    {
+        $this->peso = $peso;
+
+        return $this;
+    }
+
+    /**
+     * Get peso
+     *
+     * @return float 
+     */
+    public function getPeso()
+    {
+        return $this->peso;
     }
 
     /**
