@@ -1,3 +1,7 @@
+pregunte_me_administracion_admin_usuario:
+    resource: "@PregunteMeAdministracionBundle/Resources/config/routing/usuario.yml"
+    prefix:   /admin/usuario
+
 pregunte_me_administracion_admin_casoEstudio:
     resource: "@PregunteMeAdministracionBundle/Resources/config/routing/casoestudio.yml"
     prefix:   /admin/casoEstudio
@@ -33,3 +37,4 @@ pregunte_me_administracion_admin_modulo:
 pregunte_me_administracion_homepage:
     path:     /admin/contenidos
     defaults: { _controller: PregunteMeAdministracionBundle:Default:index }
+
