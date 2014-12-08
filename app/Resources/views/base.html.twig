@@ -110,6 +110,13 @@
 
                 <!-- Main content -->
                 <section class="content">
+					{% for type, messages in app.session.flashbag.all() %}
+						{% for message in messages %}
+							<div class="alert alert-{{ type }}">
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endfor %}
 					{% block body %}{% endblock %}
 
                 </section><!-- /.content -->
