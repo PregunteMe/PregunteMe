@@ -1,0 +1,30 @@
+admin_usuario:
+    path:     /
+    defaults: { _controller: "PregunteMeAdministracionBundle:Usuario:index" }
+
+admin_usuario_show:
+    path:     /{id}/show
+    defaults: { _controller: "PregunteMeAdministracionBundle:Usuario:show" }
+
+admin_usuario_new:
+    path:     /new
+    defaults: { _controller: "PregunteMeAdministracionBundle:Usuario:new" }
+
+admin_usuario_create:
+    path:     /create
+    defaults: { _controller: "PregunteMeAdministracionBundle:Usuario:create" }
+    requirements: { _method: post }
+
+admin_usuario_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PregunteMeAdministracionBundle:Usuario:edit" }
+
+admin_usuario_update:
+    path:     /{id}/update
+    defaults: { _controller: "PregunteMeAdministracionBundle:Usuario:update" }
+    requirements: { _method: post|put }
+
+admin_usuario_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PregunteMeAdministracionBundle:Usuario:delete" }
+    requirements: { _method: post|delete }
