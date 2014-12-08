@@ -45,10 +45,10 @@ class WebController extends Controller
 		$request = $this->getRequest(); 
 		$session = $this->getRequest()->getSession();
 		
-		if ($session->get("usuario")!="Anonimo"){
-			return $this->redirect($this->generateUrl('evaluacion'));
+		if (is_null($user)){
+			return $this->redirect($this->generateUrl('index'));
 		}
-		
+		/*
 		
 		$nombre = $request->get("nombre");
 		$correo = $request->get("correo");
@@ -71,7 +71,7 @@ class WebController extends Controller
 		
 		
 		$session->set("usuario", $correo);
-		$session->set("casoEstudio", $casoEstudio);
+		$session->set("casoEstudio", $casoEstudio);*/
 		
 		return $this->render('PregunteMePresentacionBundle:Web:inscripcion.html.twig', array(
 				'datos'=>$this->calcularDatos(),
