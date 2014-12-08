@@ -1,0 +1,16 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}PregunteMeAdministracionBundle:Contenidos:cargarArchivo{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Contenidos:cargarArchivo page</h1>
+
+
+<form action="{{path('cargar_archivo')}}" method="POST" enctype="multipart/form-data" >
+	Modulo: <input class="span2" name="modulo" /><br/>
+	Archivo: <input class="span2" name="documento" type="file" /><br/>
+	<input type="submit" value="Subir nuevo modulo"/>
+</form>
+ 
+
+{% endblock %}

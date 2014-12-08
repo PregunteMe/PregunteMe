@@ -38,3 +38,11 @@ pregunte_me_administracion_homepage:
     path:     /admin/contenidos
     defaults: { _controller: PregunteMeAdministracionBundle:Default:index }
 
+
+cargar_archivo:
+    path:     /admin/contenidos/cargar
+    defaults: { _controller: PregunteMeAdministracionBundle:Contenidos:cargarArchivo }
+
+descargar_archivo:
+    path:     /admin/contenidos/descargar
+    defaults: { _controller: PregunteMeAdministracionBundle:Contenidos:descargarArchivo }
