@@ -25,3 +25,18 @@ formulario:
 dimension:
     path:     /dimension
     defaults: { _controller: PregunteMePresentacionBundle:Formulario:dimension }
+
+login:
+    pattern: /login
+    defaults: { _controller: PregunteMePresentacionBundle:Web:login }
+
+login_check:
+    path:   /login_check
+
+logout:
+    pattern: /logout
+    defaults: { _controller: PregunteMePresentacionBundle:Web:logout }
+registro:
+    pattern: /registro
+    defaults: { _controller: PregunteMePresentacionBundle:Web:registro }
+
