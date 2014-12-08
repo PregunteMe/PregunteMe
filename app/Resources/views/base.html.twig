@@ -73,19 +73,31 @@
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
 	                <ul class="sidebar-menu">
-		                Menu principal
-		                <li class="treeview">
-		                    <a href="#">
-		                        <i class="fa fa-bar-chart-o"></i>
-		                        <span>Opciones</span>
-		                        <i class="fa fa-angle-left pull-right"></i>
-		                    </a>
-		                    <ul class="treeview-menu">
-				                <li><a href="{{path('inscripcion')}}"><i class="fa fa-angle-double-right"></i> Crear nuevo proceso</a></li>
-				                <li><a href="#"><i class="fa fa-angle-double-right"></i> Ver historial pedidos</a></li>
-
-		                    </ul>
-		                </li>
+		                {% if not app.user is null %}
+							Opciones Generales
+						            <li><a href="{{path('inscripcion')}}"><i class="fa fa-angle-double-right"></i> Crear nuevo proceso</a></li>
+						            <li><a href="#"><i class="fa fa-angle-double-right"></i> Ver historial pedidos</a></li>
+						            <li><a href="{{path('logout')}}"><i class="fa fa-times-circle"></i> Salir</a></li>
+				            Administración 
+									<li><a href="{{path('admin_usuario')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar usuarios</a></li>
+							Contenidos en bloque
+									<li><a href="{{path('cargar_archivo')}}"><i class="fa fa-bar-chart-o"></i> Cargar archivo</a></li>
+									<li><a href="{{path('descargar_archivo')}}"><i class="fa fa-bar-chart-o"></i> Descargar archivo</a></li>
+							Crud en detalle
+									<li><a href="{{path('admin_modulo')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar modulos</a></li>
+									<li><a href="{{path('admin_dimension')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar dimensiones</a></li>
+									<li><a href="{{path('admin_categoria')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar categorias</a></li>
+									<li><a href="{{path('admin_indicador')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar indicadores</a></li>
+									<li><a href="{{path('admin_nivel')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar niveles</a></li>
+									<li><a href="{{path('admin_pregunta')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar preguntas</a></li>
+									<li><a href="{{path('admin_respuesta')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar respuestas</a></li>
+									
+						{% else %}
+							Opciones Generales
+						            <li><a href="{{path('login')}}"><i class="fa fa-user"></i> Ingresar</a></li>
+						            <li><a href="{{path('registro')}}"><i class="fa fa-users"></i> Registro</a></li>
+						
+						{% endif %}
                     </ul>
 	            </section>
                 <!-- /.sidebar -->
