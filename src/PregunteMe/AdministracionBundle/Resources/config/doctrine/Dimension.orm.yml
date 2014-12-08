@@ -16,6 +16,8 @@ PregunteMe\AdministracionBundle\Entity\Dimension:
             type: text
         justificacion:
             type: text
+        peso:
+            type: float
     manyToOne:
         modulo:
             targetEntity: Modulo

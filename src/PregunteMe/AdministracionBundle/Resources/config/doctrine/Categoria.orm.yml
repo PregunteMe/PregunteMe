@@ -16,6 +16,8 @@ PregunteMe\AdministracionBundle\Entity\Categoria:
             type: text
         justificacion:
             type: text
+        peso:
+            type: float
     manyToOne:
         dimension:
             targetEntity: Dimension

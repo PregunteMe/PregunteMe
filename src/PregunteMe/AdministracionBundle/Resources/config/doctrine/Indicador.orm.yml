@@ -16,6 +16,8 @@ PregunteMe\AdministracionBundle\Entity\Indicador:
             type: text
         justificacion:
             type: text
+        peso:
+            type: float
     manyToOne:
         categoria:
             targetEntity: Categoria
