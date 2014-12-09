@@ -10,12 +10,28 @@
 	padding:10px;
 	margin:10px;
 }
+.pregunta{
+	border:1px solid gray;
+	padding:10px;
+	margin:10px;
+}
+.respuesta{
+	border:1px dotted gray;
+	padding:10px;
+	margin:10px;
+}
+
+.respuesta:hover {
+    background-color: lightgreen;
+} 
+
 </style>
 
 
 <h1>Evaluación de calidad de un {{app.session.get('modulo')}}</h1>
 
 
+{% set coma = ""%}
 {% set contadorD = 0 %}
 {% for dimension in dimensiones %}
 	<div class="dimension" id="dimension_{{contadorD}}">
@@ -23,7 +39,7 @@
 		
 		{% set contadorC = 0 %}
 		{% for categoria in dimension.categorias %}
-			<div class="categoria">
+			<div class="categoria" id="categoria_{{contadorC}}">
 			<h2>{{categoria.nombre}}</h2>
 			{#<p>{{categoria.descripcion}}</p>#}
 			
@@ -46,17 +62,21 @@
 				{% endfor %}
 			
 			
-			{% set contadorI = contadorI+1 %}
+				{% set contadorI = contadorI + 1 %}
 			{% endfor %}
 			
 			</div>
 
-		{% set contadorC = contadorC+1 %}
+			{% set contadorC = contadorC + 1 %}
 		{% endfor %}
 		
 	</div>
-	{% set contadorD = contadorD+1 %}
+	{% set contadorD = contadorD + 1 %}
 {% endfor %}
+
+<script>
+	var preguntas=[{#{ info }#}];
+</script>
 
 
 
