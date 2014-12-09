@@ -78,8 +78,8 @@
 		                {% if not app.user is null %}
 							Opciones Generales
 									<li><a href="{{path("seleccion_modulo")}}"><i class="fa fa-tags"></i> Seleccionar Modulo</a></li>
-						            <li><a href="{{path('inscripcion')}}"><i class="fa fa-file-o"></i> Crear nuevo proceso</a></li>
-						            <li><a href="{{path('historico')}}"><i class="fa fa-bar-chart-o"></i> Ver historial pedidos</a></li>
+						            <li><a href="{{path('inscripcion')}}"><i class="fa fa-file-o"></i> Crear nueva evaluacion</a></li>
+						            <li><a href="{{path('historico')}}"><i class="fa fa-bar-chart-o"></i> Ver historial</a></li>
 						            <li><a href="{{path('logout')}}"><i class="fa fa-times-circle"></i> Salir</a></li>
 				            Administración 
 									<li><a href="{{path('admin_usuario')}}"><i class="fa fa-users"></i> Adminsitrar usuarios</a></li>
@@ -99,6 +99,7 @@
 							Opciones Generales
 						            <li><a href="{{path('login')}}"><i class="fa fa-user"></i> Ingresar</a></li>
 						            <li><a href="{{path('registro')}}"><i class="fa fa-users"></i> Registro</a></li>
+						            <li><a href="{{path('historico')}}"><i class="fa fa-bar-chart-o"></i> Ver historial</a></li>
 						
 						{% endif %}
                     </ul>

@@ -164,11 +164,12 @@ class WebController extends Controller
 		$session = $this->getRequest()->getSession();
 		$em = $this->getDoctrine()->getManager();
 
-
+		/*
 		if (is_null($user)){
 			$session->getFlashBag()->set('danger', "Por favor ingrese al sistema");
 			return $this->redirect($this->generateUrl('index'));
 		}
+		*/
 		
 		if ($id==0){
 			$id_casoEstudio = $session->get("casoEstudio");
