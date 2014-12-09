@@ -46,6 +46,7 @@ sincronizarYML:
 	rm src/PregunteMe/AdministracionBundle/Entity/*
 	php app/console doctrine:generate:entities PregunteMe/AdministracionBundle --path=src
 	git checkout  src/PregunteMe/AdministracionBundle/Entity/Usuario.php
+	git checkout  src/PregunteMe/AdministracionBundle/Entity/Modulo.php
 
 	git checkout src/PregunteMe/AdministracionBundle/Entity/CasoEstudioRepository.php
 	git checkout src/PregunteMe/AdministracionBundle/Entity/CategoriaRepository.php
