@@ -3,5 +3,61 @@
 {% block title %}PregunteMePresentacionBundle:Web:evaluacion{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Web:evaluacion page</h1>
+
+<style>
+.dimension{
+	border:1px solid gray;
+	padding:10px;
+	margin:10px;
+}
+</style>
+
+
+<h1>Evaluación de calidad de un {{app.session.get('modulo')}}</h1>
+
+
+{% set contadorD = 0 %}
+{% for dimension in dimensiones %}
+	<div class="dimension" id="dimension_{{contadorD}}">
+		<h1>{{dimension.nombre}}</h1>
+		
+		{% set contadorC = 0 %}
+		{% for categoria in dimension.categorias %}
+			<div class="categoria">
+			<h2>{{categoria.nombre}}</h2>
+			{#<p>{{categoria.descripcion}}</p>#}
+			
+			{% set contadorI = 0 %}
+			{% for indicador in categoria.indicadores %}
+				
+				{% for nivel in indicador.niveles %}
+				
+					{% for pregunta in nivel.preguntas %}
+						<div class="pregunta">
+							<div class="texto">{{pregunta.texto}}</div>
+							{% for respuesta in pregunta.respuestas %}
+								<div class="respuesta">{{respuesta.texto}}</div>
+							{% endfor %}
+						</div>
+				
+				
+					{% endfor %}
+				
+				{% endfor %}
+			
+			
+			{% set contadorI = contadorI+1 %}
+			{% endfor %}
+			
+			</div>
+
+		{% set contadorC = contadorC+1 %}
+		{% endfor %}
+		
+	</div>
+	{% set contadorD = contadorD+1 %}
+{% endfor %}
+
+
+
 {% endblock %}

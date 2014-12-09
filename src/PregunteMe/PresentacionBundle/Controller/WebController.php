@@ -16,26 +16,31 @@ class WebController extends Controller
 {
 	var $entorno = "OVA";
 	
-	public function calcularDatos(){
-	
-		$session = $this->getRequest()->getSession();
-		$usuario = $session->get("usuario");
-		if (!isset($usuario)){
-			$usuario = 'Anonimo';
-		}
-		return array(
-			'usuario'=>$usuario, 
-			'entorno' => $this->entorno,
-			'titulo' => "PregunteMe",
-			'subtitulo' => "Evaluación de ".$this->entorno,
-		);
-	}
-	
 
 	public function indexAction()
 	{
 		return $this->render('PregunteMePresentacionBundle:Web:index.html.twig', array(
-				'datos'=>$this->calcularDatos(),
+			));
+	}
+
+	public function seleccionModuloAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+		
+		
+		$user = $this->getUser();
+		$request = $this->getRequest(); 
+		$session = $this->getRequest()->getSession();
+		
+		$m = $request->get("modulo");
+		if (isset($m)){
+			$session->set("modulo", $m);
+			return $this->redirect($this->generateUrl('index'));	
+		}
+		
+		$modulos = $em->getRepository('PregunteMeAdministracionBundle:Modulo')->findAll();
+		return $this->render('PregunteMePresentacionBundle:Web:seleccionModulo.html.twig', array(
+			"modulos"=>$modulos,
 			));
 	}
 
@@ -46,55 +51,82 @@ class WebController extends Controller
 		$session = $this->getRequest()->getSession();
 		
 		if (is_null($user)){
+			$this->get('session')->getFlashBag()->set('danger', "Por favor ingrese al sistema");
 			return $this->redirect($this->generateUrl('index'));
 		}
-		/*
 		
-		$nombre = $request->get("nombre");
-		$correo = $request->get("correo");
+		$nombre = $user->getUser();
+		$correo = $user->getEmail();
 		$institucion = $request->get("institucion");
 		$programa = $request->get("programa");
 		$objeto = $request->get("objeto");
 		
-		$casoEstudio = new CasoEstudio();
-		$casoEstudio->setNombre($nombre);
-		$casoEstudio->setCorreo($correo);
-		$casoEstudio->setInstitucion($institucion);
-		$casoEstudio->setPrograma($programa);
-		$casoEstudio->setNombreObjeto($objeto);
-		$casoEstudio->setFecha(new \Datetime());
+		if (isset($objeto)){
+
+			$casoEstudio = new CasoEstudio();
+			$casoEstudio->setNombre($nombre);
+			$casoEstudio->setCorreo($correo);
+			$casoEstudio->setInstitucion($institucion);
+			$casoEstudio->setPrograma($programa);
+			$casoEstudio->setNombreObjeto($objeto);
+			$casoEstudio->setFecha(new \Datetime());
 		
 		
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($casoEstudio);
-		$em->flush();
-		
-		
-		$session->set("usuario", $correo);
-		$session->set("casoEstudio", $casoEstudio);*/
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($casoEstudio);
+			$em->flush();
+
+			$this->get('session')->getFlashBag()->set('success', "Nueva evaluación de ".$session->get("modulo"));
+			$session->set("casoEstudio", $casoEstudio->getId());
+			return $this->redirect($this->generateUrl('evaluacion'));
+		}
 		
 		return $this->render('PregunteMePresentacionBundle:Web:inscripcion.html.twig', array(
-				'datos'=>$this->calcularDatos(),
 			));
 	}
 
 	public function evaluacionAction()
 	{
-	
+		$user = $this->getUser();
+		$request = $this->getRequest(); 
+		$session = $this->getRequest()->getSession();
 		$em = $this->getDoctrine()->getManager();
 
-        $indicadores = $em->getRepository('PregunteMeAdministracionBundle:Indicador')->findAll();
+
+		if (is_null($user)){
+			$session->getFlashBag()->set('danger', "Por favor ingrese al sistema");
+			return $this->redirect($this->generateUrl('index'));
+		}
+
+		$id_casoEstudio = $session->get("casoEstudio");
+		if (!isset($id_casoEstudio)){
+			return $this->redirect($this->generateUrl('inscripcion'));
+		}
+		
+		$casoEstudio = $em->getRepository('PregunteMeAdministracionBundle:CasoEstudio')->find($id_casoEstudio);
+		$session->getFlashBag()->set('info', "Evaluando el caso de estudio ".$casoEstudio->getId());
+
+
+		$r_modulo = $em->getRepository('PregunteMeAdministracionBundle:Modulo');
+		$modulo = $r_modulo->findOneByNombre($session->get("modulo"));
+		
+		$dimensiones = $em->getRepository('PregunteMeAdministracionBundle:Dimension')->findBy(
+			array("modulo"=>$modulo)
+		);
+		
+		//\Doctrine\Common\Util\Debug::dump($session->get("modulo"));
+		//\Doctrine\Common\Util\Debug::dump("Modulo ".$modulo);
+		//\Doctrine\Common\Util\Debug::dump($dimensiones);
         
 		return $this->render('PregunteMePresentacionBundle:Web:evaluacion.html.twig', array(
-				'datos'=>$this->calcularDatos(),
-				'indicadores' => $indicadores
+			"dimensiones" => $dimensiones,
+			"casoEstudio" => $casoEstudio
 			));
 	}
 
 	public function resultadosAction()
 	{
 		return $this->render('PregunteMePresentacionBundle:Web:resultados.html.twig', array(
-				'datos'=>$this->calcularDatos(),
 			));
 	}
 
