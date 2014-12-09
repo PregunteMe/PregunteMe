@@ -188,7 +188,7 @@ class ManejoArchivos{
 				
 				
 				$i = 3;
-				while(strlen($fila[$i])>0){
+				while(isset($fila[$i]) && strlen($fila[$i])>0){
 					$pregunta = $fila[$i];
 					ManejoArchivos::addPregunta($t, $indicador, $pregunta);
 					$i++;
