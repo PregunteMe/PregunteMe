@@ -37,7 +37,7 @@ class Pregunta
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $respuesta;
+    private $respuestas;
 
     /**
      * @var \PregunteMe\AdministracionBundle\Entity\Nivel
@@ -49,7 +49,7 @@ class Pregunta
      */
     public function __construct()
     {
-        $this->respuesta = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->respuestas = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -155,36 +155,36 @@ class Pregunta
     }
 
     /**
-     * Add respuesta
+     * Add respuestas
      *
-     * @param \PregunteMe\AdministracionBundle\Entity\Respuesta $respuesta
+     * @param \PregunteMe\AdministracionBundle\Entity\Respuesta $respuestas
      * @return Pregunta
      */
-    public function addRespuestum(\PregunteMe\AdministracionBundle\Entity\Respuesta $respuesta)
+    public function addRespuesta(\PregunteMe\AdministracionBundle\Entity\Respuesta $respuestas)
     {
-        $this->respuesta[] = $respuesta;
+        $this->respuestas[] = $respuestas;
 
         return $this;
     }
 
     /**
-     * Remove respuesta
+     * Remove respuestas
      *
-     * @param \PregunteMe\AdministracionBundle\Entity\Respuesta $respuesta
+     * @param \PregunteMe\AdministracionBundle\Entity\Respuesta $respuestas
      */
-    public function removeRespuestum(\PregunteMe\AdministracionBundle\Entity\Respuesta $respuesta)
+    public function removeRespuesta(\PregunteMe\AdministracionBundle\Entity\Respuesta $respuestas)
     {
-        $this->respuesta->removeElement($respuesta);
+        $this->respuestas->removeElement($respuestas);
     }
 
     /**
-     * Get respuesta
+     * Get respuestas
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRespuesta()
+    public function getRespuestas()
     {
-        return $this->respuesta;
+        return $this->respuestas;
     }
 
     /**
