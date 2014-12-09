@@ -163,6 +163,7 @@ class WebController extends Controller
             $encoder = $factory->getEncoder($entity);
 			$password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
 			$entity->setPass($password);
+			$entity->setFechaRegistro(new \Datetime());
 
             
             $em->persist($entity);
@@ -170,7 +171,7 @@ class WebController extends Controller
             
             //ToDo: Colocar en la bolsa el mensaje sobre el registro
 
-            return $this->redirect($this->generateUrl('index'));
+            return $this->redirect($this->generateUrl('login'));
         }
 
         return $this->render('PregunteMePresentacionBundle:Web:registro.html.twig', array(
