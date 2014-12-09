@@ -32,6 +32,11 @@ class WebController extends Controller
 		$request = $this->getRequest(); 
 		$session = $this->getRequest()->getSession();
 		
+		if (is_null($user)){
+			$this->get('session')->getFlashBag()->set('danger', "Por favor ingrese al sistema");
+			return $this->redirect($this->generateUrl('login'));
+		}
+		
 		$m = $request->get("modulo");
 		if (isset($m)){
 			$session->set("modulo", $m);
@@ -52,7 +57,12 @@ class WebController extends Controller
 		
 		if (is_null($user)){
 			$this->get('session')->getFlashBag()->set('danger', "Por favor ingrese al sistema");
-			return $this->redirect($this->generateUrl('index'));
+			return $this->redirect($this->generateUrl('login'));
+		}
+		
+		$modulo = $session->get('modulo');
+		if (!isset($modulo) || strlen($modulo)==0){
+			return $this->redirect($this->generateUrl('seleccion_modulo'));
 		}
 		
 		$nombre = $user->getUser();
@@ -64,6 +74,7 @@ class WebController extends Controller
 		if (isset($objeto)){
 
 			$casoEstudio = new CasoEstudio();
+			$casoEstudio->setUsuario($user);
 			$casoEstudio->setNombre($nombre);
 			$casoEstudio->setCorreo($correo);
 			$casoEstudio->setInstitucion($institucion);
@@ -108,25 +119,186 @@ class WebController extends Controller
 
 
 		$r_modulo = $em->getRepository('PregunteMeAdministracionBundle:Modulo');
+		$r_respuesta = $em->getRepository('PregunteMeAdministracionBundle:Respuesta');
 		$modulo = $r_modulo->findOneByNombre($session->get("modulo"));
 		
 		$dimensiones = $em->getRepository('PregunteMeAdministracionBundle:Dimension')->findBy(
 			array("modulo"=>$modulo)
 		);
 		
-		//\Doctrine\Common\Util\Debug::dump($session->get("modulo"));
-		//\Doctrine\Common\Util\Debug::dump("Modulo ".$modulo);
-		//\Doctrine\Common\Util\Debug::dump($dimensiones);
+
+		$datosPost = $request->request->all();
+		
+		//\Doctrine\Common\Util\Debug::dump("La cantidad parametros post es: ".count($datosPost));
+		if (count($datosPost)>0){
+			foreach($datosPost as $id=>$datoPost){
+				//\Doctrine\Common\Util\Debug::dump($id." = ".$datoPost);
+				$respuesta = $r_respuesta->find($datoPost);
+				$casoEstudio->addRespuesta($respuesta);
+			}
+			$em->persist($casoEstudio);
+			$em->flush();
+			$session->getFlashBag()->set('success', "Información almacenada");
+			return $this->redirect($this->generateUrl('resultados'));
         
+		}
 		return $this->render('PregunteMePresentacionBundle:Web:evaluacion.html.twig', array(
 			"dimensiones" => $dimensiones,
 			"casoEstudio" => $casoEstudio
 			));
 	}
+	
+	public function historicoAction(){
+		$em = $this->getDoctrine()->getManager();
+		$casosEstudio = $em->getRepository('PregunteMeAdministracionBundle:CasoEstudio')->findAll();
+		
+		return $this->render('PregunteMePresentacionBundle:Web:historico.html.twig', array(
+			"casosEstudio" => $casosEstudio,
+			));
+	}
 
-	public function resultadosAction()
+	public function resultadosAction($id)
 	{
+		$user = $this->getUser();
+		$request = $this->getRequest(); 
+		$session = $this->getRequest()->getSession();
+		$em = $this->getDoctrine()->getManager();
+
+
+		if (is_null($user)){
+			$session->getFlashBag()->set('danger', "Por favor ingrese al sistema");
+			return $this->redirect($this->generateUrl('index'));
+		}
+		
+		if ($id==0){
+			$id_casoEstudio = $session->get("casoEstudio");
+		}else{
+			$id_casoEstudio = $id;
+		}
+		if (!isset($id_casoEstudio)){
+			return $this->redirect($this->generateUrl('inscripcion'));
+		}
+		
+		$casoEstudio = $em->getRepository('PregunteMeAdministracionBundle:CasoEstudio')->find($id_casoEstudio);
+		
+		if (is_null($casoEstudio)){
+			$session->getFlashBag()->set('danger', "No existe el caso de estudio ".$id_casoEstudio);
+			return $this->redirect($this->generateUrl('index'));
+		}
+		
+		$resultado = array();
+		$pesosInternos = 0.0;
+		foreach($casoEstudio->getRespuestas() as $respuesta){
+			$pregunta = $respuesta->getPregunta();
+			$nivel = $pregunta->getNivel();
+			$indicador = $nivel->getIndicador();
+			$categoria = $indicador->getCategoria();
+			$dimension = $categoria->getDimension();
+			
+			$pre = $pregunta->getId();
+			$niv = $nivel->getId();
+			$ind = $indicador->getId();
+			$cat = $categoria->getId();
+			$dim = $dimension->getId();
+			
+			
+			
+			if (!isset($resultado[$dim])){
+				$resultado[$dim] = array("nombre"=>$dimension->getNombre(), "peso"=>$dimension->getPeso(), "pesosInternos"=>0.0, "dat"=>array());
+				$pesosInternos += $dimension->getPeso();
+			}
+			if (!isset($resultado[$dim]["dat"][$cat])){
+				$resultado[$dim]["dat"][$cat] = array("nombre"=>$categoria->getNombre(), "peso"=>$categoria->getPeso(), "pesosInternos"=>0.0, "dat"=>array());
+				$resultado[$dim]["pesosInternos"]+=$categoria->getPeso();
+			}
+			if (!isset($resultado[$dim]["dat"][$cat]["dat"][$ind])){
+				$resultado[$dim]["dat"][$cat]["dat"][$ind] = array("nombre"=>$indicador->getNombre(), "peso"=>$indicador->getPeso(), "total"=>0, "acumulado"=>0);
+				$resultado[$dim]["dat"][$cat]["pesosInternos"]+=$indicador->getPeso();
+			}
+			$resultado[$dim]["dat"][$cat]["dat"][$ind]["total"]++;
+			$resultado[$dim]["dat"][$cat]["dat"][$ind]["acumulado"]+=$respuesta->getPuntaje();
+			
+			
+		}
+		
+		
+		$acumulado = 0.0;
+		foreach($resultado as $i=>$dim){
+			$resultado[$i]["acumulado"]=0;
+			foreach($dim["dat"] as $j=>$cat){
+				$resultado[$i]["dat"][$j]["acumulado"]=0;
+				foreach($cat["dat"] as $k=>$ind){
+					$ind["puntaje"] = $ind["acumulado"]/$ind["total"];
+					$resultado[$i]["dat"][$j]["acumulado"] += $ind["puntaje"];
+					//\Doctrine\Common\Util\Debug::dump("\t\t\tPuntaje i[".$ind["nombre"]."]".$ind["puntaje"]);
+					
+				}
+				$resultado[$i]["dat"][$j]["puntaje"] = $resultado[$i]["dat"][$j]["acumulado"]/$cat["pesosInternos"];
+				$resultado[$i]["acumulado"] += $resultado[$i]["dat"][$j]["puntaje"];
+				//\Doctrine\Common\Util\Debug::dump("\t\tPuntaje c[".$cat["nombre"]."]".$resultado[$i]["dat"][$j]["puntaje"]);
+			}
+			$resultado[$i]["puntaje"] = $resultado[$i]["acumulado"]/$dim["pesosInternos"];
+			$acumulado += $resultado[$i]["puntaje"];
+			//\Doctrine\Common\Util\Debug::dump("\tPuntaje d[".$cat["nombre"]."]".$resultado[$i]["puntaje"]);
+		}
+		//\Doctrine\Common\Util\Debug::dump($pesosInternos);
+		//\Doctrine\Common\Util\Debug::dump($resultado, 8);	
+		//\Doctrine\Common\Util\Debug::dump($acumulado/$pesosInternos);
+
+		$tablaResultado = array(array(
+			"Puntaje General",
+			"Dimensión", "Puntaje",
+			"Categoria", "Puntaje",
+			"Indicador", "Puntaje",
+		));	
+		
+		
+		//\Doctrine\Common\Util\Debug::dump("Construyendo resultado general");
+		$primeraD = true;
+		foreach($resultado as $i=>$dim){
+			$primeraC = true;
+			foreach($dim["dat"] as $j=>$cat){
+				$primeraI = true;
+				foreach($cat["dat"] as $k=>$ind){
+					$fila = array();
+					if ($primeraD){
+						$fila[]=number_format ( 100*$acumulado/$pesosInternos, 2)."%";
+					}else{
+						$fila[]="";
+					}
+					$primeraD = false;
+					if ($primeraC){
+						$fila[]=$dim["nombre"];
+						$fila[]=number_format ( 100*$resultado[$i]["puntaje"], 2)."%";
+					}else{
+						$fila[]="";
+						$fila[]="";
+					}
+					$primeraC = false;
+					if ($primeraI){
+						$fila[]=$cat["nombre"];
+						$fila[]=number_format ( 100*$resultado[$i]["dat"][$j]["puntaje"], 2)."%";
+					}else{
+						$fila[]="";
+						$fila[]="";
+					}
+					$primeraI = false;
+					$ind["puntaje"] = number_format ( 100*$ind["acumulado"]/$ind["total"], 2)."%";
+					
+					$fila[]=$ind["nombre"];
+					$fila[]=$ind["puntaje"];
+
+					$tablaResultado[]=$fila;
+					
+				}
+			}
+		}
+		
+		//\Doctrine\Common\Util\Debug::dump($tablaResultado);
+		
 		return $this->render('PregunteMePresentacionBundle:Web:resultados.html.twig', array(
+			"casoEstudio" => $casoEstudio,
+			"tablaResultado" => $tablaResultado,
 			));
 	}
 
