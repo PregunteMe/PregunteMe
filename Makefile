@@ -40,3 +40,31 @@ install:
 	curl -sS https://getcomposer.org/installer | php
 	php composer.phar install
 	make cache
+
+
+sincronizarYML:
+	rm src/PregunteMe/AdministracionBundle/Entity/*
+	php app/console doctrine:generate:entities PregunteMe/AdministracionBundle --path=src
+	git checkout  src/PregunteMe/AdministracionBundle/Entity/Usuario.php
+
+	git checkout src/PregunteMe/AdministracionBundle/Entity/CasoEstudioRepository.php
+	git checkout src/PregunteMe/AdministracionBundle/Entity/CategoriaRepository.php
+	git checkout src/PregunteMe/AdministracionBundle/Entity/DimensionRepository.php
+	git checkout src/PregunteMe/AdministracionBundle/Entity/IndicadorRepository.php
+	git checkout src/PregunteMe/AdministracionBundle/Entity/ModuloRepository.php
+	git checkout src/PregunteMe/AdministracionBundle/Entity/NivelRepository.php
+	git checkout src/PregunteMe/AdministracionBundle/Entity/PreguntaRepository.php
+	git checkout src/PregunteMe/AdministracionBundle/Entity/RespuestaRepository.php
+
+
+
+
+
+
+
+
+
+
+
+
+
