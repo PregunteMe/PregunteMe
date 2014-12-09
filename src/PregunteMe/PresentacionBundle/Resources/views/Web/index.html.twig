@@ -5,7 +5,10 @@
 {% block body %}
 <h1>Pagina inicial del proyecto PregunteMe</h1>
 
-<a href="{{path('inscripcion')}}">Inscribir una nueva evaluación de un {{datos.entorno}}</a>
-
+{% if not app.session.get('modulo') is null %}
+	<a class="btn btn-info" href="{{path('inscripcion')}}">Inscribir una nueva evaluación de un {{app.session.get('modulo')}}</a>
+{% else %}
+	<a class="btn btn-info" href="{{path("seleccion_modulo")}}">Seleccionar Modulo</a>
+{% endif %}
 
 {% endblock %}
