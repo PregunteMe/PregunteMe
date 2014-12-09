@@ -3,5 +3,39 @@
 {% block title %}PregunteMePresentacionBundle:Web:resultados{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Web:resultados page</h1>
+
+<style>
+
+.objetoEvaluado{
+	border:1px dotted red;
+	padding:20px;
+	margin:20px;
+	text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+}
+</style>
+
+<h1>Resultado Evaluación de calidad de un {{app.session.get('modulo')}}</h1>
+
+<div class="objetoEvaluado">
+Institución: {{casoEstudio.institucion}}<hr>
+Objeto: {{casoEstudio.nombreObjeto}}
+</div>
+
+<table class="table table-striped table-bordered table-hover table-condensed">
+{% for fila in tablaResultado %}
+	{% if loop.first %}
+		{% set tt = "th" %}
+	{% else %}
+		{% set tt = "td" %}
+	{% endif %}
+	<tr>
+	{% for col in fila %}
+		<{{tt}}>{{col}}</{{tt}}>
+	{% endfor %}
+	</tr>
+{% endfor %}
+</table>
+
 {% endblock %}
