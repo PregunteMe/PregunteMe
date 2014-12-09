@@ -75,14 +75,15 @@
 	                <ul class="sidebar-menu">
 		                {% if not app.user is null %}
 							Opciones Generales
-						            <li><a href="{{path('inscripcion')}}"><i class="fa fa-angle-double-right"></i> Crear nuevo proceso</a></li>
-						            <li><a href="#"><i class="fa fa-angle-double-right"></i> Ver historial pedidos</a></li>
+									<li><a href="{{path("seleccion_modulo")}}"><i class="fa fa-tags"></i> Seleccionar Modulo</a></li>
+						            <li><a href="{{path('inscripcion')}}"><i class="fa fa-file-o"></i> Crear nuevo proceso</a></li>
+						            <li><a href="#"><i class="fa fa-bars"></i> Ver historial pedidos</a></li>
 						            <li><a href="{{path('logout')}}"><i class="fa fa-times-circle"></i> Salir</a></li>
 				            Administración 
-									<li><a href="{{path('admin_usuario')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar usuarios</a></li>
+									<li><a href="{{path('admin_usuario')}}"><i class="fa fa-users"></i> Adminsitrar usuarios</a></li>
 							Contenidos en bloque
-									<li><a href="{{path('cargar_archivo')}}"><i class="fa fa-bar-chart-o"></i> Cargar archivo</a></li>
-									<li><a href="{{path('descargar_archivo')}}"><i class="fa fa-bar-chart-o"></i> Descargar archivo</a></li>
+									<li><a href="{{path('cargar_archivo')}}"><i class="fa fa-cloud-upload"></i> Cargar archivo</a></li>
+									<li><a href="{{path('descargar_archivo')}}"><i class="fa fa-cloud-download"></i> Descargar archivo</a></li>
 							Crud en detalle
 									<li><a href="{{path('admin_modulo')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar modulos</a></li>
 									<li><a href="{{path('admin_dimension')}}"><i class="fa fa-bar-chart-o"></i> Adminsitrar dimensiones</a></li>
@@ -124,7 +125,7 @@
                 <section class="content">
 					{% for type, messages in app.session.flashbag.all() %}
 						{% for message in messages %}
-							<div class="alert alert-{{ type }}">
+							<div class="alert alert-{{ type }} bg-{{ type }}">
 								{{ message }}
 							</div>
 						{% endfor %}
