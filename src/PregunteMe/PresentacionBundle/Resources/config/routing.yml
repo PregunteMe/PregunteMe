@@ -26,6 +26,10 @@ dimension:
     path:     /dimension
     defaults: { _controller: PregunteMePresentacionBundle:Formulario:dimension }
 
+seleccion_modulo:
+    path:     /seleccionModulo
+    defaults: { _controller: PregunteMePresentacionBundle:Web:seleccionModulo }
+
 login:
     pattern: /login
     defaults: { _controller: PregunteMePresentacionBundle:Web:login }
