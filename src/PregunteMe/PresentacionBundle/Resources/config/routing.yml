@@ -11,8 +11,12 @@ evaluacion:
     defaults: { _controller: PregunteMePresentacionBundle:Web:evaluacion }
 
 resultados:
-    path:     /resultados
-    defaults: { _controller: PregunteMePresentacionBundle:Web:resultados }
+    path:     /resultados/{id}
+    defaults: { _controller: PregunteMePresentacionBundle:Web:resultados, id:0 }
+    
+historico:
+    path:     /historico
+    defaults: { _controller: PregunteMePresentacionBundle:Web:historico }
     
 salir:
     path:     /salir
