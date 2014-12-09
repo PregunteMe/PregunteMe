@@ -29,11 +29,11 @@ permisos:
 	sudo chmod g+rw app/logs -R
 
 db:
-	make cache
+	make permisos
 	php app/console doctrine:schema:drop --force
 	php app/console doctrine:schema:create
 	#php app/console doctrine:fixtures:load --no-interaction
-	make cache
+	make permisos
 
 install:
 	sudo apt-get install apache2 php5 mysql-server curl git
