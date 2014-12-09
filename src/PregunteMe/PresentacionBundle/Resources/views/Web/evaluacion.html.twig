@@ -15,6 +15,13 @@
 	padding:10px;
 	margin:10px;
 }
+.pregunta > .texto{
+	border:2px solid black;
+	padding:10px;
+	margin:10px;
+    font-weight: bold;
+    text-align: center;
+}
 .respuesta{
 	border:1px dotted gray;
 	padding:10px;
@@ -30,6 +37,8 @@
 
 <h1>Evaluación de calidad de un {{app.session.get('modulo')}}</h1>
 
+
+<form>
 
 {% set coma = ""%}
 {% set contadorD = 0 %}
@@ -52,7 +61,11 @@
 						<div class="pregunta">
 							<div class="texto">{{pregunta.texto}}</div>
 							{% for respuesta in pregunta.respuestas %}
-								<div class="respuesta">{{respuesta.texto}}</div>
+								
+								<div class="respuesta" id="respuesta_{{pregunta.id}}_{{respuesta.id}}">
+									<input type='radio' id="radio_{{pregunta.id}}_{{respuesta.id}}" name='pregunta_{{pregunta.id}}' value='{{respuesta.id}}'/>
+									{{respuesta.texto}}
+								</div>
 							{% endfor %}
 						</div>
 				
@@ -73,9 +86,18 @@
 	</div>
 	{% set contadorD = contadorD + 1 %}
 {% endfor %}
+</form>
 
 <script>
-	var preguntas=[{#{ info }#}];
+	$(function(){
+		$(".respuesta").on("click", function(){
+			datos = $(this).attr("id").split("_");
+			$("#radio_"+datos[1]+"_"+datos[2]).iCheck('check');
+			$("#radio_"+datos[1]+"_"+datos[2]).attr('checked', 'checked');
+			$("#radio_"+datos[1]+"_"+datos[2]).prop('checked',true);
+			
+		});
+	});
 </script>
 
 
