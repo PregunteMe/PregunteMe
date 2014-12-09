@@ -23,7 +23,7 @@ PregunteMe\AdministracionBundle\Entity\Pregunta:
             targetEntity: Nivel
             inversedBy: preguntas
     oneToMany:
-        respuesta:
+        respuestas:
             targetEntity: Respuesta
-            mappedBy: preguntas           
+            mappedBy: pregunta
     lifecycleCallbacks: {  }

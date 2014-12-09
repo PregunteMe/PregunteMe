@@ -22,5 +22,5 @@ PregunteMe\AdministracionBundle\Entity\Nivel:
     oneToMany:
         preguntas:
             targetEntity: Pregunta
-            mappedBy: niveles           
+            mappedBy: nivel           
     lifecycleCallbacks: {  }
