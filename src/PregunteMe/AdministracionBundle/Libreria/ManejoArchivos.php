@@ -105,16 +105,36 @@ class ManejoArchivos{
 			$em->persist($pregunta);
 			$em->flush();
 			
-			
 			$respuesta = new Respuesta();
-			$respuesta->setTexto("Si");
+			$respuesta->setTexto("Muy de acuerdo");
 			$respuesta->setPuntaje(1);
+			$respuesta->setPregunta($pregunta);
+			$em->persist($respuesta);
+			$em->flush();
+
+			$respuesta = new Respuesta();
+			$respuesta->setTexto("De acuerdo");
+			$respuesta->setPuntaje(0.75);
+			$respuesta->setPregunta($pregunta);
+			$em->persist($respuesta);
+			$em->flush();
+
+			$respuesta = new Respuesta();
+			$respuesta->setTexto("Indiferente");
+			$respuesta->setPuntaje(0.5);
+			$respuesta->setPregunta($pregunta);
+			$em->persist($respuesta);
+			$em->flush();
+
+			$respuesta = new Respuesta();
+			$respuesta->setTexto("En desacuerdo");
+			$respuesta->setPuntaje(0.25);
 			$respuesta->setPregunta($pregunta);
 			$em->persist($respuesta);
 			$em->flush();
 			
 			$respuesta = new Respuesta();
-			$respuesta->setTexto("No");
+			$respuesta->setTexto("Muy en desacuerdo");
 			$respuesta->setPuntaje(0);
 			$respuesta->setPregunta($pregunta);
 			$em->persist($respuesta);
