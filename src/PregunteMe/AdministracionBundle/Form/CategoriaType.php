@@ -18,6 +18,7 @@ class CategoriaType extends AbstractType
             ->add('nombre')
             ->add('descripcion')
             ->add('justificacion')
+            ->add('peso')
             ->add('dimension')
         ;
     }

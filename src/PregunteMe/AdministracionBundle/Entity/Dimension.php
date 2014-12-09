@@ -209,4 +209,7 @@ class Dimension
     {
         return $this->modulo;
     }
+    public function __toString(){
+    	return $this->nombre;
+    }
 }

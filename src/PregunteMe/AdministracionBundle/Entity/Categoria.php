@@ -209,4 +209,9 @@ class Categoria
     {
         return $this->dimension;
     }
+    
+    public function __toString(){
+    	return $this->nombre;
+    }
+    
 }
