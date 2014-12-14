@@ -189,6 +189,8 @@ class WebController extends Controller
 		
 		$resultado = array();
 		$pesosInternos = 0.0;
+		
+		// Recorrer todas las respuestas del caso de estudio 
 		foreach($casoEstudio->getRespuestas() as $respuesta){
 			$pregunta = $respuesta->getPregunta();
 			$nivel = $pregunta->getNivel();
@@ -205,41 +207,64 @@ class WebController extends Controller
 			
 			
 			if (!isset($resultado[$dim])){
+				// se almacena temporalmente los datos de la dimension si no han sido creados
 				$resultado[$dim] = array("nombre"=>$dimension->getNombre(), "peso"=>$dimension->getPeso(), "pesosInternos"=>0.0, "dat"=>array());
+				
+				// variable usada para acumular los pesos de las dimensiones
 				$pesosInternos += $dimension->getPeso();
 			}
+			
+			
 			if (!isset($resultado[$dim]["dat"][$cat])){
+				// se almacena temporalmente los datos de la categoria si no han sido creados
 				$resultado[$dim]["dat"][$cat] = array("nombre"=>$categoria->getNombre(), "peso"=>$categoria->getPeso(), "pesosInternos"=>0.0, "dat"=>array());
+				
+				// variable usada para acumular los pesos de las categorias por dimensión
 				$resultado[$dim]["pesosInternos"]+=$categoria->getPeso();
 			}
+			
+			
 			if (!isset($resultado[$dim]["dat"][$cat]["dat"][$ind])){
+				// se almacena temporalmente los datos del indicador si no han sido creados
 				$resultado[$dim]["dat"][$cat]["dat"][$ind] = array("nombre"=>$indicador->getNombre(), "peso"=>$indicador->getPeso(), "total"=>0, "acumulado"=>0);
+				
+				// variable usada para acumular los pesos de los indicadores por categoría
 				$resultado[$dim]["dat"][$cat]["pesosInternos"]+=$indicador->getPeso();
 			}
+			
+			// total de preguntas por indicador
 			$resultado[$dim]["dat"][$cat]["dat"][$ind]["total"]++;
-			$resultado[$dim]["dat"][$cat]["dat"][$ind]["acumulado"]+=$respuesta->getPuntaje();
 			
-			
+			// acumulado de valores por indicador
+			$resultado[$dim]["dat"][$cat]["dat"][$ind]["acumulado"]+=$respuesta->getPuntaje();					
 		}
 		
 		
 		$acumulado = 0.0;
+		
+		// Recorre las dimensiones
 		foreach($resultado as $i=>$dim){
 			$resultado[$i]["acumulado"]=0;
+			
+			// Recorre las categorias
 			foreach($dim["dat"] as $j=>$cat){
 				$resultado[$i]["dat"][$j]["acumulado"]=0;
+				
+				// Recorre los indicadores
 				foreach($cat["dat"] as $k=>$ind){
 					$ind["puntaje"] = $ind["acumulado"]/$ind["total"];
-					$resultado[$i]["dat"][$j]["acumulado"] += $ind["puntaje"];
+					$resultado[$i]["dat"][$j]["acumulado"] += $ind["puntaje"]*$ind["peso"];
 					//\Doctrine\Common\Util\Debug::dump("\t\t\tPuntaje i[".$ind["nombre"]."]".$ind["puntaje"]);
 					
 				}
+				
 				$resultado[$i]["dat"][$j]["puntaje"] = $resultado[$i]["dat"][$j]["acumulado"]/$cat["pesosInternos"];
-				$resultado[$i]["acumulado"] += $resultado[$i]["dat"][$j]["puntaje"];
+				$resultado[$i]["acumulado"] += $resultado[$i]["dat"][$j]["puntaje"]*$cat["peso"];
 				//\Doctrine\Common\Util\Debug::dump("\t\tPuntaje c[".$cat["nombre"]."]".$resultado[$i]["dat"][$j]["puntaje"]);
 			}
+			
 			$resultado[$i]["puntaje"] = $resultado[$i]["acumulado"]/$dim["pesosInternos"];
-			$acumulado += $resultado[$i]["puntaje"];
+			$acumulado += $resultado[$i]["puntaje"]*$resultado[$i]["peso"];
 			//\Doctrine\Common\Util\Debug::dump("\tPuntaje d[".$cat["nombre"]."]".$resultado[$i]["puntaje"]);
 		}
 		//\Doctrine\Common\Util\Debug::dump($pesosInternos);
