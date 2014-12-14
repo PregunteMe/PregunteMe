@@ -3,14 +3,14 @@
 {% block title %}PregunteMePresentacionBundle:Web:resultados{% endblock %}
 
 {% block body %}
-<h1>Selecci√≥n de modulo</h1>
+<h1>Selecci√≥n de mÛdulo</h1>
 
 <form >
 <select name="modulo">
 {% for modulo in modulos %}
 	<option value="{{modulo.nombre}}">{{modulo.nombre}}</option>
 {% endfor %}
-<input type="submit" value="Seleccionar modulo"/>
+<input type="submit" value="Seleccionar mÛdulo"/>
 </form>
 
 {% endblock %}
